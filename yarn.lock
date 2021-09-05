@@ -962,6 +962,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/engines@npm:2.30.1-2.b8c35d44de987a9691890b3ddf3e2e7effb9bf20":
+  version: 2.30.1-2.b8c35d44de987a9691890b3ddf3e2e7effb9bf20
+  resolution: "@prisma/engines@npm:2.30.1-2.b8c35d44de987a9691890b3ddf3e2e7effb9bf20"
+  checksum: 9ced0e4d381267b49b6efbaed6ea4fbb269efc033a10af30657967e5682cdbaf63b1bf0168c2d52a9febf5e1377ac38d506f7b1a21ce026144835b5f24439419
+  languageName: node
+  linkType: hard
+
 "@sinonjs/commons@npm:^1.7.0":
   version: 1.8.3
   resolution: "@sinonjs/commons@npm:1.8.3"
@@ -2443,6 +2450,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     jest: ^27.0.6
     prettier: ^2.3.2
+    prisma: ^2.30.3
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     rxjs: ^7.2.0
@@ -5677,6 +5685,18 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^17.0.1
   checksum: 2472b03b804c21cb1fde94fb01c4ad6e3395e33d8e339ae0ee3dbca0a212235079c8250b5ccb15aa8700c7107b6bbbaaf7ab0d8246d4cf9092e9467a6e22beda
+  languageName: node
+  linkType: hard
+
+"prisma@npm:^2.30.3":
+  version: 2.30.3
+  resolution: "prisma@npm:2.30.3"
+  dependencies:
+    "@prisma/engines": 2.30.1-2.b8c35d44de987a9691890b3ddf3e2e7effb9bf20
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: 42e9c6ef4eaea3618116c6105e5ab6550aff3d481bc03e0ef4a28f6e37dd55f84b53ccb5706fcba7bbef3c22b0eacda59db629c31ff9c8391c78b0801d748c83
   languageName: node
   linkType: hard
 
