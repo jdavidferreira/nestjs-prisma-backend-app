@@ -10,17 +10,17 @@ Rest API using TypeScript, NestJS, Prisma, PostgreSQL, PostGIS.
 $ yarn install
 ```
 
-## Configuration
+## ⚙ Configuration
 
 Create a `.env` file. Take `.env.dev` file as base.
 
-### Database migrations
+### 🗄 Database migrations
 
 ```bash
 $ yarn dlx prisma generate
 ```
 
-## Running the app
+## ▶ Running the app
 
 ```bash
 # development
@@ -33,7 +33,7 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+## 🧪 Test
 
 ```bash
 # unit tests
