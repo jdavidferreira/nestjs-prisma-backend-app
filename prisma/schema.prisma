@@ -9,3 +9,49 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+enum Role {
+  TECHNICIAN
+  MANAGER
+  ADMIN
+}
+
+model User {
+  id                  Int         @id @default(autoincrement())
+  firstName           String      @db.VarChar()
+  lasttName           String      @db.VarChar()
+  email               String      @db.VarChar()
+  role                Role        @default(TECHNICIAN)
+  isLoggedIn          Boolean     @default(false)
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime?   @updatedAt
+  technicianOrders    Order[]     @relation("TechnicianOrder")
+  managerOrders       Order[]     @relation("ManagerOrder")
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Order {
+  id              Int           @id @default(autoincrement())
+  address         String?       @db.VarChar()
+  priority        Priority      @default(LOW)
+  technicianId    Int?
+  technician      User?         @relation("TechnicianOrder", fields: [technicianId], references: [id])
+  managerId       Int?
+  manager         User?         @relation("ManagerOrder", fields: [managerId], references: [id])
+  executedAt      DateTime?     
+  orderTypeId     Int           
+  orderType       OrderType     @relation(fields: [orderTypeId], references: [id])
+}
+
+model OrderType {
+  id              Int           @id @default(autoincrement())
+  name            String        @db.VarChar() @unique
+  description     String?       @db.Text()
+  color           String        @db.Char(6) @unique
+  orders          Order[]
+}
