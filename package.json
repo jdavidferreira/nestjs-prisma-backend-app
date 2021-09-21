@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:migrate": "yarn dlx prisma generate",
     "db:migrate:make": "yarn dlx prisma migrate dev --name --",
-    "typecheck": "tsc --project . --noEmit"
+    "typecheck": "tsc --project . --noEmit",
+    "nest-g": "nest g --"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
