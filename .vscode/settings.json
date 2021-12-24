@@ -1,0 +1,9 @@
+{
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.yarn": true,
+    "**/yarn.lock": true
+  }
+}
