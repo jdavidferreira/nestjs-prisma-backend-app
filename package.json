@@ -19,14 +19,14 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:migrate": "yarn dlx prisma generate",
+    "db:migrate": "yarn dlx prisma migrate dev",
     "db:migrate:make": "yarn dlx prisma migrate dev --name --",
-    "typecheck": "tsc --project . --noEmit",
-    "nest-g": "nest g --"
+    "typecheck": "tsc --project . --noEmit"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.4",
     "@nestjs/core": "^8.2.4",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^8.2.4",
     "@prisma/client": "^3.7.0",
     "reflect-metadata": "^0.1.13",
