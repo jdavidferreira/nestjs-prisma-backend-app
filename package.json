@@ -19,8 +19,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:migrate": "yarn dlx prisma migrate dev",
-    "db:migrate:make": "yarn dlx prisma migrate dev --name --",
+    "db:seed": "prisma db seed",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:make": "prisma migrate dev --name --",
+    "db:reset": "prisma migrate reset",
     "typecheck": "tsc --project . --noEmit"
   },
   "dependencies": {
@@ -55,6 +57,9 @@
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "jest": {
     "moduleFileExtensions": [

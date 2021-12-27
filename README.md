@@ -24,10 +24,10 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
 
 ### 🗄 Database migrations
 
-- Every time the prisma schema changes (e.g. when a model is added/modified), run:
+- Every time the prisma schema changes (e.g. when a model is added/modified), run to update the Prisma Client:
 
   ```bash
-  yarn dlx prisma generate
+  yarn prisma generate
   ```
 
   `prisma generate` is automatically invoked when you're installing the `@prisma/client` npm package. So it can skipped when installing dependencies for the first time.
@@ -35,10 +35,16 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
 - To generate and apply migrations (i.e. create database and tables):
 
   ```bash
-  yarn dlx prisma migrate dev
+  yarn db:migrate
   ```
 
-  The previous command should be run when setting up the dev environment for the first time.
+  The previous command should be run when setting up the dev environment for the first time. It automatically runs database seeding.
+
+- To manually seed the database, run:
+
+  ```bash
+  yarn db:seed
+  ```
 
 ## ▶ Running the app
 

@@ -27,6 +27,8 @@ model User {
   updatedAt           DateTime?   @updatedAt
   technicianOrders    Order[]     @relation("TechnicianOrder")
   managerOrders       Order[]     @relation("ManagerOrder")
+
+  @@unique([email])
 }
 
 enum Priority {
