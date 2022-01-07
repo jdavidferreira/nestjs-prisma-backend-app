@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -38,5 +39,10 @@ export class UserController {
     @Body() data: UpdateUserDto,
   ): Promise<User> {
     return this.userService.update({ where: { id }, data })
+  }
+
+  @Delete(':id')
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.delete({ id })
   }
 }
