@@ -6,9 +6,9 @@ import { PrismaService } from 'src/prisma/prisma.service'
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async findById(userId: Prisma.UserWhereUniqueInput): Promise<User | null> {
+  async findById(userId: number): Promise<User | null> {
     return this.prisma.user.findUnique({
-      where: userId,
+      where: { id: userId },
     })
   }
 
@@ -22,6 +22,7 @@ export class UserService {
     } = {},
   ): Promise<User[]> {
     const { skip, take, cursor, where, orderBy } = params
+
     return this.prisma.user.findMany({
       skip,
       take,
@@ -35,11 +36,12 @@ export class UserService {
     return this.prisma.user.create({ data })
   }
 
-  updateUser(params: {
+  update(params: {
     where: Prisma.UserWhereUniqueInput
     data: Prisma.UserUpdateInput
   }) {
     const { data, where } = params
+
     return this.prisma.user.update({ data, where })
   }
 
