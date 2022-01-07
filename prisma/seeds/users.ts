@@ -1,15 +1,15 @@
-import { Role } from '@prisma/client'
+import { UserRole } from '@prisma/client'
 
 export const users = [
   {
     firstName: 'John',
-    lasttName: 'Doe',
+    lastName: 'Doe',
     email: 'john_doe@email.com',
-    role: Role.ADMIN,
+    role: UserRole.ADMIN,
   },
   {
     firstName: 'Jane',
-    lasttName: 'Doe',
+    lastName: 'Doe',
     email: 'jane_doe@email.com',
   },
 ]

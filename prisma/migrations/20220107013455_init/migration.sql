@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('TECHNICIAN', 'MANAGER', 'ADMIN');
+CREATE TYPE "UserRole" AS ENUM ('TECHNICIAN', 'MANAGER', 'ADMIN');
 
 -- CreateEnum
 CREATE TYPE "Priority" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
@@ -8,9 +8,9 @@ CREATE TYPE "Priority" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "firstName" VARCHAR NOT NULL,
-    "lasttName" VARCHAR NOT NULL,
+    "lastName" VARCHAR NOT NULL,
     "email" VARCHAR NOT NULL,
-    "role" "Role" NOT NULL DEFAULT E'TECHNICIAN',
+    "role" "UserRole" NOT NULL DEFAULT E'TECHNICIAN',
     "isLoggedIn" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
