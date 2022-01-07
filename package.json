@@ -19,9 +19,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:seed": "prisma db seed",
     "db:migrate": "prisma migrate dev",
-    "db:migrate:make": "prisma migrate dev --name --",
+    "db:migrate:make": "prisma migrate dev --name",
+    "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset",
     "typecheck": "tsc --project . --noEmit"
   },
