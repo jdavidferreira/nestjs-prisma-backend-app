@@ -1,7 +1,8 @@
 import { ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app/app.module'
+import { PrismaClientExceptionFilter } from './filters/prisma-client-exception.filter'
 import { PrismaService } from './prisma/prisma.service'
 
 async function bootstrap() {
@@ -11,7 +12,12 @@ async function bootstrap() {
   const prismaService: PrismaService = app.get(PrismaService)
   prismaService.enableShutdownHooks(app)
 
+  // Class validation
   app.useGlobalPipes(new ValidationPipe())
+
+  // Handle Psima exceptions using a filter
+  const { httpAdapter } = app.get(HttpAdapterHost)
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter))
 
   // Swagger config
   const config = new DocumentBuilder()
