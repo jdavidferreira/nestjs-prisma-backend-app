@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app/app.module'
@@ -9,6 +10,8 @@ async function bootstrap() {
   // Prisma config
   const prismaService: PrismaService = app.get(PrismaService)
   prismaService.enableShutdownHooks(app)
+
+  app.useGlobalPipes(new ValidationPipe())
 
   // Swagger config
   const config = new DocumentBuilder()
