@@ -12,7 +12,7 @@ describe('UserController', () => {
     controller = module.get<UserController>(UserController)
   })
 
-  it('should be defined', () => {
+  it('is be defined', () => {
     expect(controller).toBeDefined()
   })
 })

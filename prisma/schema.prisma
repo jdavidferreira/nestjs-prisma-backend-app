@@ -1,13 +1,44 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model User {
+  id               Int       @id @default(autoincrement())
+  firstName        String    @db.VarChar
+  lastName         String    @db.VarChar
+  email            String    @unique @db.VarChar
+  role             UserRole  @default(TECHNICIAN)
+  isLoggedIn       Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime? @updatedAt
+  managerOrders    Order[]   @relation("ManagerOrder")
+  technicianOrders Order[]   @relation("TechnicianOrder")
+}
+
+model Order {
+  id           Int       @id @default(autoincrement())
+  address      String?   @db.VarChar
+  priority     Priority  @default(LOW)
+  technicianId Int?
+  managerId    Int?
+  executedAt   DateTime?
+  orderTypeId  Int
+  manager      User?     @relation("ManagerOrder", fields: [managerId], references: [id])
+  orderType    OrderType @relation(fields: [orderTypeId], references: [id])
+  technician   User?     @relation("TechnicianOrder", fields: [technicianId], references: [id])
+}
+
+model OrderType {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique @db.VarChar
+  description String?
+  color       String  @unique @db.Char(6)
+  orders      Order[]
 }
 
 enum UserRole {
@@ -16,44 +47,8 @@ enum UserRole {
   ADMIN
 }
 
-model User {
-  id                  Int         @id @default(autoincrement())
-  firstName           String      @db.VarChar()
-  lastName            String      @db.VarChar()
-  email               String      @db.VarChar()
-  role                UserRole    @default(TECHNICIAN)
-  isLoggedIn          Boolean     @default(false)
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime?   @updatedAt
-  technicianOrders    Order[]     @relation("TechnicianOrder")
-  managerOrders       Order[]     @relation("ManagerOrder")
-
-  @@unique([email])
-}
-
 enum Priority {
   LOW
   MEDIUM
   HIGH
-}
-
-model Order {
-  id              Int           @id @default(autoincrement())
-  address         String?       @db.VarChar()
-  priority        Priority      @default(LOW)
-  technicianId    Int?
-  technician      User?         @relation("TechnicianOrder", fields: [technicianId], references: [id])
-  managerId       Int?
-  manager         User?         @relation("ManagerOrder", fields: [managerId], references: [id])
-  executedAt      DateTime?     
-  orderTypeId     Int           
-  orderType       OrderType     @relation(fields: [orderTypeId], references: [id])
-}
-
-model OrderType {
-  id              Int           @id @default(autoincrement())
-  name            String        @db.VarChar() @unique
-  description     String?       @db.Text()
-  color           String        @db.Char(6) @unique
-  orders          Order[]
 }
