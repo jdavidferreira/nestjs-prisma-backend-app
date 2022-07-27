@@ -15,7 +15,7 @@ async function bootstrap() {
   // Class validation
   app.useGlobalPipes(new ValidationPipe())
 
-  // Handle Psima exceptions using a filter
+  // Handle Prisma exceptions using a filter
   const { httpAdapter } = app.get(HttpAdapterHost)
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter))
 
