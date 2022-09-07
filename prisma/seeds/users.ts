@@ -1,6 +1,6 @@
-import { UserRole } from '@prisma/client'
+import { Prisma, UserRole } from '@prisma/client'
 
-export const users = [
+export const users: Prisma.UserCreateInput[] = [
   {
     firstName: 'John',
     lastName: 'Doe',
