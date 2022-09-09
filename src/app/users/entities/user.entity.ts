@@ -14,7 +14,11 @@ export class UserEntity implements User {
   @ApiProperty()
   email!: string
 
-  @ApiProperty({ default: UserRole.TECHNICIAN })
+  @ApiProperty({
+    enum: UserRole,
+    enumName: 'UserRole',
+    default: UserRole.TECHNICIAN,
+  })
   role!: UserRole
 
   @ApiProperty({ default: false })
