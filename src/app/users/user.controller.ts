@@ -40,17 +40,17 @@ export class UserController {
 
   @Post()
   @ApiCreatedResponse({ type: UserEntity })
-  async create(@Body() data: CreateUserDto): Promise<User> {
-    return this.userService.create(data)
+  async create(@Body() user: CreateUserDto): Promise<User> {
+    return this.userService.create(user)
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: UserEntity })
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() data: UpdateUserDto,
+    @Body() user: UpdateUserDto,
   ): Promise<User> {
-    return this.userService.update({ where: { id }, data })
+    return this.userService.update({ id }, user)
   }
 
   @Delete(':id')

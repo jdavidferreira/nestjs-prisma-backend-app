@@ -32,17 +32,12 @@ export class UserService {
     })
   }
 
-  create(data: Prisma.UserCreateInput) {
-    return this.prisma.user.create({ data })
+  create(user: Prisma.UserCreateInput) {
+    return this.prisma.user.create({ data: user })
   }
 
-  update(params: {
-    where: Prisma.UserWhereUniqueInput
-    data: Prisma.UserUpdateInput
-  }) {
-    const { data, where } = params
-
-    return this.prisma.user.update({ data, where })
+  update(where: Prisma.UserWhereUniqueInput, user: Prisma.UserUpdateInput) {
+    return this.prisma.user.update({ data: user, where })
   }
 
   delete(where: Prisma.UserWhereUniqueInput) {
