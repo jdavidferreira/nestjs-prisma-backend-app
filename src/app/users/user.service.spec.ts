@@ -50,17 +50,26 @@ describe('UserService', () => {
   })
 
   describe('create', () => {
-    it('creates a user', () => {
+    it('creates a user', async () => {
       const userData: CreateUserDto = {
         firstName: 'firstNameTest',
         lastName: 'lastNameTest',
         email: 'test@email.com',
         role: UserRole.TECHNICIAN,
+        password: '123456',
       }
 
       prisma.user.create.mockResolvedValueOnce(testUser)
 
-      expect(userService.create(userData)).resolves.toBe(testUser)
+      const result = await userService.create(userData)
+
+      expect(result).toEqual(testUser)
+      expect(prisma.user.create).toHaveBeenCalledWith({
+        data: {
+          ...userData,
+          password: expect.not.stringMatching(userData.password),
+        },
+      })
     })
   })
 
@@ -99,4 +108,5 @@ const testUser: User = {
   isLoggedIn: false,
   createdAt: new Date(),
   updatedAt: new Date(),
+  password: '12345',
 } as const

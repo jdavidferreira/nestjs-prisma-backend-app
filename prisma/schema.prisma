@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id                  Int       @id @default(autoincrement())
-  firstName           String    @db.VarChar
-  lastName            String    @db.VarChar
-  email               String    @unique @db.VarChar
-  role                UserRole  @default(TECHNICIAN)
-  isLoggedIn          Boolean   @default(false)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime? @updatedAt
-  ordersAsManager     Order[]   @relation("ManagerOrder")
-  ordersAsTechnician  Order[]   @relation("TechnicianOrder")
+  id                 Int       @id @default(autoincrement())
+  firstName          String    @db.VarChar
+  lastName           String    @db.VarChar
+  email              String    @unique @db.VarChar
+  role               UserRole  @default(TECHNICIAN)
+  isLoggedIn         Boolean   @default(false)
+  password           String    @db.VarChar
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime? @updatedAt
+  ordersAsManager    Order[]   @relation("ManagerOrder")
+  ordersAsTechnician Order[]   @relation("TechnicianOrder")
 }
 
 model Order {

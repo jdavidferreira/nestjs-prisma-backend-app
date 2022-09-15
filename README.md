@@ -30,7 +30,7 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
   yarn prisma generate
   ```
 
-  `prisma generate` is automatically invoked when you're installing the `@prisma/client` npm package. So it can skipped when installing dependencies for the first time.
+  `prisma generate` is automatically invoked when you're installing the `@prisma/client` npm package or when creating migration files. So it can skipped when installing dependencies for the first time.
 
 - To generate and apply migrations (i.e. create database and tables):
 
@@ -38,7 +38,7 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
   yarn db:migrate
   ```
 
-  The previous command should be run when setting up the dev environment for the first time. It automatically runs database seeding.
+  The previous command should be run when setting up the dev environment for the first time.
 
 - To manually seed the database, run:
 

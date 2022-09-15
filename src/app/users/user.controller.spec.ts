@@ -68,6 +68,7 @@ describe('UserController', () => {
         lastName: 'lastNameTest',
         email: 'test@email.com',
         role: UserRole.TECHNICIAN,
+        password: '12345',
       }
 
       userService.create.mockResolvedValueOnce(testUser)
@@ -111,4 +112,5 @@ const testUser: User = {
   isLoggedIn: false,
   createdAt: new Date(),
   updatedAt: new Date(),
+  password: '12345',
 } as const

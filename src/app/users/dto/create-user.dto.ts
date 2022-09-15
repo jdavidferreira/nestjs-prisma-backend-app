@@ -32,4 +32,8 @@ export class CreateUserDto {
     default: UserRole.TECHNICIAN,
   })
   role?: UserRole
+
+  @MinLength(6)
+  @ApiProperty()
+  password!: string
 }
