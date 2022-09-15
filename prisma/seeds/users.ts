@@ -1,4 +1,5 @@
 import { Prisma, UserRole } from '@prisma/client'
+import bcrypt from 'bcrypt'
 
 export const users: Prisma.UserCreateInput[] = [
   {
@@ -6,12 +7,12 @@ export const users: Prisma.UserCreateInput[] = [
     lastName: 'Doe',
     email: 'john_doe@email.com',
     role: UserRole.ADMIN,
-    password: '123456',
+    password: bcrypt.hashSync('123456', 10),
   },
   {
     firstName: 'Jane',
     lastName: 'Doe',
     email: 'jane_doe@email.com',
-    password: '123456',
+    password: bcrypt.hashSync('123456', 10),
   },
 ]
