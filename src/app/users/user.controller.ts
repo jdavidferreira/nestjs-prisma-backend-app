@@ -8,7 +8,6 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  UseGuards,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -21,10 +20,8 @@ import { User } from '@prisma/client'
 import { UserService } from './user.service'
 import { CreateUserDto, UpdateUserDto } from './dto'
 import { UserEntity } from './entities/user.entity'
-import { JwtAuthGuard } from './../auth/jwt-auth.guard'
 
 @ApiTags('Users')
-@UseGuards(JwtAuthGuard) // 🔒
 @ApiBearerAuth()
 @Controller('users')
 export class UserController {
