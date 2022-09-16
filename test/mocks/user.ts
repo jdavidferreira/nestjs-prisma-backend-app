@@ -9,8 +9,8 @@ export function createRandomUser(): User {
     email: 'test@email.com',
     role: UserRole.TECHNICIAN,
     isLoggedIn: false,
+    password: bcrypt.hashSync('123456', 10),
     createdAt: new Date(),
     updatedAt: new Date(),
-    password: bcrypt.hashSync('123456', 10),
   } as const
 }

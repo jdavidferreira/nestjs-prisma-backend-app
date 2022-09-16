@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -15,19 +16,23 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger'
-import { User } from '@prisma/client'
+import { User, UserRole } from '@prisma/client'
 
 import { UserService } from './user.service'
 import { CreateUserDto, UpdateUserDto } from './dto'
 import { UserEntity } from './entities/user.entity'
+import { Roles } from 'src/decorators/roles.decorator'
+import { RolesGuard } from 'src/guards/roles.guard'
 
 @ApiTags('Users')
 @ApiBearerAuth()
+@UseGuards(RolesGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @Roles(UserRole.ADMIN)
   @ApiOkResponse({ type: [UserEntity] })
   async findAll(): Promise<User[]> {
     return this.userService.findAll()
