@@ -4,6 +4,7 @@ import { User, UserRole } from '@prisma/client'
 import { mockDeep, DeepMockProxy } from 'jest-mock-extended'
 
 import { PrismaModule } from 'src/prisma/prisma.module'
+import { createRandomUser } from 'test/mocks/user'
 import { CreateUserDto, UpdateUserDto } from './dto'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
@@ -11,6 +12,7 @@ import { UserService } from './user.service'
 describe('UserController', () => {
   let userController: UserController
   let userService: DeepMockProxy<UserService>
+  let testUser: User
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -24,6 +26,7 @@ describe('UserController', () => {
 
     userController = module.get(UserController)
     userService = module.get(UserService)
+    testUser = createRandomUser()
   })
 
   it('is defined', () => {
@@ -102,15 +105,3 @@ describe('UserController', () => {
     })
   })
 })
-
-const testUser: User = {
-  id: 1,
-  firstName: 'firstNameTest',
-  lastName: 'lastNameTest',
-  email: 'test@email.com',
-  role: UserRole.TECHNICIAN,
-  isLoggedIn: false,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  password: '12345',
-} as const

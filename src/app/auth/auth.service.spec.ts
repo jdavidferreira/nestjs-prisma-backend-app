@@ -1,17 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { JwtService } from '@nestjs/jwt'
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended'
-import bcrypt from 'bcrypt'
+import { User } from '@prisma/client'
 
 import { PrismaModule } from 'src/prisma/prisma.module'
 import { AuthService } from './auth.service'
 import { UserModule, UserService } from '../users'
-import { User, UserRole } from '@prisma/client'
+import { createRandomUser } from 'test/mocks/user'
 
 describe('AuthService', () => {
   let authService: AuthService
   let jwtService: DeepMockProxy<JwtService>
   let userService: DeepMockProxy<UserService>
+  let testUser: User
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,6 +28,7 @@ describe('AuthService', () => {
     authService = module.get(AuthService)
     jwtService = module.get(JwtService)
     userService = module.get(UserService)
+    testUser = createRandomUser()
   })
 
   it('should be defined', () => {
@@ -34,7 +36,7 @@ describe('AuthService', () => {
   })
 
   describe('logIn', () => {
-    it('logs in and return accessToken', async () => {
+    it('logs in and returns accessToken', async () => {
       userService.findByEmail.mockResolvedValue(testUser)
       jwtService.signAsync.mockResolvedValue('accessToken')
 
@@ -54,15 +56,3 @@ describe('AuthService', () => {
     })
   })
 })
-
-export const testUser: User = {
-  id: 1,
-  firstName: 'firstNameTest',
-  lastName: 'lastNameTest',
-  email: 'test@email.com',
-  role: UserRole.TECHNICIAN,
-  isLoggedIn: false,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  password: bcrypt.hashSync('123456', 10),
-} as const

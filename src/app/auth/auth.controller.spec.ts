@@ -1,13 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { JwtService } from '@nestjs/jwt'
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended'
-import bcrypt from 'bcrypt'
 
 import { PrismaModule } from 'src/prisma/prisma.module'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { UserModule } from '../users'
-import { User, UserRole } from '@prisma/client'
+import { createRandomUser } from 'test/mocks/user'
 
 describe('AuthController', () => {
   let authController: AuthController
@@ -33,6 +32,7 @@ describe('AuthController', () => {
 
   describe('logIn', () => {
     test('logs in and returns accessToken', async () => {
+      const testUser = createRandomUser()
       const expected = { accessToken: 'accessToken' }
 
       authService.logIn.mockResolvedValue(expected)
@@ -46,15 +46,3 @@ describe('AuthController', () => {
     })
   })
 })
-
-export const testUser: User = {
-  id: 1,
-  firstName: 'firstNameTest',
-  lastName: 'lastNameTest',
-  email: 'test@email.com',
-  role: UserRole.TECHNICIAN,
-  isLoggedIn: false,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  password: bcrypt.hashSync('123456', 10),
-} as const
