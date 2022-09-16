@@ -1,30 +1,60 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { JwtService } from '@nestjs/jwt'
-import { PrismaClient } from '@prisma/client'
-import { mockDeep } from 'jest-mock-extended'
+import { DeepMockProxy, mockDeep } from 'jest-mock-extended'
+import bcrypt from 'bcrypt'
 
 import { PrismaModule } from 'src/prisma/prisma.module'
-import { PrismaService } from 'src/prisma/prisma.service'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
+import { UserModule } from '../users'
+import { User, UserRole } from '@prisma/client'
 
 describe('AuthController', () => {
-  let controller: AuthController
+  let authController: AuthController
+  let authService: DeepMockProxy<AuthService>
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
       providers: [AuthService, JwtService],
-      imports: [PrismaModule],
+      imports: [PrismaModule, UserModule],
     })
-      .overrideProvider(PrismaService)
-      .useValue(mockDeep<PrismaClient>())
+      .overrideProvider(AuthService)
+      .useValue(mockDeep<AuthService>())
       .compile()
 
-    controller = module.get<AuthController>(AuthController)
+    authController = module.get(AuthController)
+    authService = module.get(AuthService)
   })
 
   it('should be defined', () => {
-    expect(controller).toBeDefined()
+    expect(authController).toBeDefined()
+  })
+
+  describe('logIn', () => {
+    test('logs in and returns accessToken', async () => {
+      const expected = { accessToken: 'accessToken' }
+
+      authService.logIn.mockResolvedValue(expected)
+
+      const result = await authController.logIn({
+        email: testUser.email,
+        password: testUser.password,
+      })
+
+      expect(result).toBe(expected)
+    })
   })
 })
+
+export const testUser: User = {
+  id: 1,
+  firstName: 'firstNameTest',
+  lastName: 'lastNameTest',
+  email: 'test@email.com',
+  role: UserRole.TECHNICIAN,
+  isLoggedIn: false,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  password: bcrypt.hashSync('123456', 10),
+} as const

@@ -5,17 +5,17 @@ import {
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import bcrypt from 'bcrypt'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { UserService } from '../users'
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
 
   async logIn(email: string, password: string) {
-    const user = await this.prisma.user.findUnique({ where: { email } })
+    const user = await this.userService.findByEmail(email)
 
     if (!user) {
       throw new NotFoundException()
@@ -27,7 +27,7 @@ export class AuthService {
       throw new UnauthorizedException()
     }
 
-    const accessToken = this.jwtService.sign({ userId: user.id })
+    const accessToken = await this.jwtService.signAsync({ userId: user.id })
 
     return { accessToken }
   }
@@ -36,7 +36,13 @@ export class AuthService {
     return bcrypt.compare(password, userPassword)
   }
 
-  validateUser(userId: number) {
-    return this.prisma.user.findUnique({ where: { id: userId } })
+  async validateUser(userId: number) {
+    const user = await this.userService.findById(userId)
+
+    if (!user) {
+      throw new UnauthorizedException()
+    }
+
+    return user
   }
 }

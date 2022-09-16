@@ -36,6 +36,14 @@ describe('UserService', () => {
     })
   })
 
+  describe('findByEmail', () => {
+    it('returns user', () => {
+      prisma.user.findUnique.mockResolvedValueOnce(testUser)
+
+      expect(userService.findByEmail(testUser.email)).resolves.toBe(testUser)
+    })
+  })
+
   describe('findAll', () => {
     it('returns users', async () => {
       const testUsers: User[] = [testUser]
