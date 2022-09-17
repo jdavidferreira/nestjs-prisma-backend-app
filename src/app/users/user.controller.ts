@@ -39,6 +39,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOkResponse({ type: UserEntity })
   async findById(@Param('id', ParseIntPipe) id: number): Promise<User> {
     const user = await this.userService.findById(id)
@@ -51,12 +52,14 @@ export class UserController {
   }
 
   @Post()
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiCreatedResponse({ type: UserEntity })
   async create(@Body() user: CreateUserDto): Promise<User> {
     return this.userService.create(user)
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOkResponse({ type: UserEntity })
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -66,6 +69,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOkResponse({ type: UserEntity })
   async delete(@Param('id', ParseIntPipe) id: number) {
     return this.userService.delete({ id })
