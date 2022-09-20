@@ -95,9 +95,7 @@ describe('UserService', () => {
 
       prisma.user.update.mockResolvedValueOnce(testUser)
 
-      expect(userService.update({ id: testUser.id }, userData)).resolves.toBe(
-        testUser,
-      )
+      expect(userService.update(testUser.id, userData)).resolves.toBe(testUser)
     })
   })
 
@@ -105,7 +103,7 @@ describe('UserService', () => {
     it('deletes a user', () => {
       prisma.user.delete.mockResolvedValueOnce(testUser)
 
-      expect(userService.delete({ id: testUser.id })).resolves.toBe(testUser)
+      expect(userService.delete(testUser.id)).resolves.toBe(testUser)
     })
   })
 })

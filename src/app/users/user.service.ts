@@ -4,6 +4,7 @@ import { isString } from 'lodash'
 import bcrypt from 'bcrypt'
 
 import { PrismaService } from 'src/prisma/prisma.service'
+import { CreateUserDto, UpdateUserDto } from './dto'
 
 @Injectable()
 export class UserService {
@@ -39,7 +40,7 @@ export class UserService {
     })
   }
 
-  async create(user: Prisma.UserCreateInput) {
+  async create(user: CreateUserDto) {
     const data = { ...user }
 
     data.password = await bcrypt.hash(user.password, 10)
@@ -47,20 +48,17 @@ export class UserService {
     return this.prisma.user.create({ data })
   }
 
-  async update(
-    where: Prisma.UserWhereUniqueInput,
-    user: Prisma.UserUpdateInput,
-  ) {
+  async update(id: number, user: UpdateUserDto) {
     const data = { ...user }
 
     if (isString(user.password)) {
       data.password = await bcrypt.hash(user.password, 10)
     }
 
-    return this.prisma.user.update({ data, where })
+    return this.prisma.user.update({ data, where: { id } })
   }
 
-  delete(where: Prisma.UserWhereUniqueInput) {
-    return this.prisma.user.delete({ where })
+  delete(id: number) {
+    return this.prisma.user.delete({ where: { id } })
   }
 }

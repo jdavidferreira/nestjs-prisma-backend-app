@@ -65,13 +65,13 @@ export class UserController {
     @Param('id', ParseIntPipe) id: number,
     @Body() user: UpdateUserDto,
   ): Promise<User> {
-    return this.userService.update({ id }, user)
+    return this.userService.update(id, user)
   }
 
   @Delete(':id')
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOkResponse({ type: UserEntity })
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.delete({ id })
+    return this.userService.delete(id)
   }
 }
