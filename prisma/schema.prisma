@@ -22,16 +22,16 @@ model User {
 }
 
 model Order {
-  id           Int       @id @default(autoincrement())
-  address      String?   @db.VarChar
-  priority     Priority  @default(LOW)
+  id           Int           @id @default(autoincrement())
+  address      String?       @db.VarChar
+  priority     OrderPriority @default(LOW)
   technicianId Int?
   managerId    Int?
   executedAt   DateTime?
   orderTypeId  Int
-  manager      User?     @relation("ManagerOrder", fields: [managerId], references: [id])
-  orderType    OrderType @relation(fields: [orderTypeId], references: [id])
-  technician   User?     @relation("TechnicianOrder", fields: [technicianId], references: [id])
+  manager      User?         @relation("ManagerOrder", fields: [managerId], references: [id])
+  orderType    OrderType     @relation(fields: [orderTypeId], references: [id])
+  technician   User?         @relation("TechnicianOrder", fields: [technicianId], references: [id])
 }
 
 model OrderType {
@@ -48,7 +48,7 @@ enum UserRole {
   ADMIN
 }
 
-enum Priority {
+enum OrderPriority {
   LOW
   MEDIUM
   HIGH
