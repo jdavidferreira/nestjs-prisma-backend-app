@@ -22,6 +22,14 @@ Run the following command:
 docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTGRES_DB=complete-app -d postgres:14
 ```
 
+### Create a `.env` file.
+
+Take the `.env.dev` file as base.
+
+```
+DATABASE_URL="postgres://postgres:abcd1234@localhost:5432/complete-app"
+```
+
 ### 🗄 Database migrations
 
 - Every time the prisma schema changes (e.g. when a model is added/modified), run to update the Prisma Client:
