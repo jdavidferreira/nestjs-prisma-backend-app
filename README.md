@@ -7,7 +7,7 @@ Rest API using TypeScript, NestJS, Prisma, PostgreSQL, PostGIS.
 ## Installation
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ## ⚙ Configuration
@@ -27,7 +27,7 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
 - Every time the prisma schema changes (e.g. when a model is added/modified), run to update the Prisma Client:
 
   ```bash
-  yarn prisma generate
+  pnpm prisma generate
   ```
 
   `prisma generate` is automatically invoked when you're installing the `@prisma/client` npm package or when creating migration files. So it can skipped when installing dependencies for the first time.
@@ -35,7 +35,7 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
 - To generate and apply migrations (i.e. create database and tables):
 
   ```bash
-  yarn db:migrate
+  pnpm db:migrate
   ```
 
   The previous command should be run when setting up the dev environment for the first time.
@@ -43,33 +43,33 @@ docker run --name postgresql -p 5432:5432 -e POSTGRES_PASSWORD=abcd1234 -e POSTG
 - To manually seed the database, run:
 
   ```bash
-  yarn db:seed
+  pnpm db:seed
   ```
 
 ## ▶ Running the app
 
 ```bash
 # development
-yarn run start
+pnpm run start
 
 # watch mode
-yarn run start:dev
+pnpm run start:dev
 
 # production mode
-yarn run start:prod
+pnpm run start:prod
 ```
 
 ## 🧪 Test
 
 ```bash
 # unit tests
-yarn run test
+pnpm run test
 
 # e2e tests
-yarn run test:e2e
+pnpm run test:e2e
 
 # test coverage
-yarn run test:cov
+pnpm run test:cov
 ```
 
 ## License
