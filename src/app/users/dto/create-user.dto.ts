@@ -31,7 +31,7 @@ export class CreateUserDto {
     enumName: 'UserRole',
     default: UserRole.TECHNICIAN,
   })
-  role?: UserRole
+  role!: UserRole
 
   @MinLength(6)
   @ApiProperty()

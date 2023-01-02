@@ -1,4 +1,4 @@
-import { Prisma, User } from '.prisma/client'
+import { Prisma, User } from '@prisma/client'
 import { Injectable } from '@nestjs/common'
 import { isString } from 'lodash'
 import bcrypt from 'bcrypt'

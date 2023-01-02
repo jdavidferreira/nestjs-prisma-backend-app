@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { OrderPriority } from '@prisma/client'
-import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 
 export class CreateOrderDto {
   @IsNotEmpty()
@@ -17,14 +17,16 @@ export class CreateOrderDto {
   })
   priority!: OrderPriority
 
-  @IsOptional()
+  @IsNumber()
   @ApiProperty()
-  technicianId?: number
+  technicianId!: number
 
-  @IsOptional()
+  @IsNumber()
   @ApiProperty()
-  managerId?: number
+  managerId!: number
 
+  // TODO: pending relationship
+  @IsNumber()
   @ApiProperty()
   orderTypeId!: number
 }
