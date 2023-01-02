@@ -26,6 +26,7 @@
     "typecheck": "tsc --project . --noEmit"
   },
   "dependencies": {
+    "@devoxa/prisma-relay-cursor-connection": "^2.2.2",
     "@nestjs/common": "^9.2.1",
     "@nestjs/core": "^9.2.1",
     "@nestjs/jwt": "^10.0.1",

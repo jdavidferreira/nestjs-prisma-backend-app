@@ -13,7 +13,13 @@ async function bootstrap() {
   prismaService.enableShutdownHooks(app)
 
   // Class validation
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }))
+  app.useGlobalPipes(
+    new ValidationPipe({
+      forbidUnknownValues: false,
+      transform: true, // 👈 automatically transform payloads
+      whitelist: true,
+    }),
+  )
 
   // Handle Prisma exceptions using a filter
   const { httpAdapter } = app.get(HttpAdapterHost)

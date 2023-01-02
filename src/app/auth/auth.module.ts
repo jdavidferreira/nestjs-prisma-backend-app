@@ -14,7 +14,7 @@ export const jwtSecret = 'jwtSr3cret' // TODO: move to an env variable
     PassportModule,
     JwtModule.register({
       secret: jwtSecret,
-      signOptions: { expiresIn: '15m' }, // e.g. 7d, 24h
+      signOptions: { expiresIn: '7d' }, // e.g. 7d, 24h
     }),
     UserModule,
   ],

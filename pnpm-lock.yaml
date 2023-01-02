@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@devoxa/prisma-relay-cursor-connection': ^2.2.2
   '@nestjs/cli': ^9.1.8
   '@nestjs/common': ^9.2.1
   '@nestjs/core': ^9.2.1
@@ -46,6 +47,7 @@ specifiers:
   typescript: 4.9.4
 
 dependencies:
+  '@devoxa/prisma-relay-cursor-connection': 2.2.2_@prisma+client@4.8.0
   '@nestjs/common': 9.2.1_welcnyot5bzd5wa2aovbkxpi4i
   '@nestjs/core': 9.2.1_e6la6qvsclaae2becwjnmfvsuq
   '@nestjs/jwt': 10.0.1_@nestjs+common@9.2.1
@@ -521,6 +523,15 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+
+  /@devoxa/prisma-relay-cursor-connection/2.2.2_@prisma+client@4.8.0:
+    resolution: {integrity: sha512-nR8/f8DQXNG6a1C3wNRs2YZa6eDCuygz/fzwt6a/ARMsr0asnMK95NhFkZ2jN+ksKHA/AtfvVZvG7UVtJOB09Q==}
+    peerDependencies:
+      '@prisma/client': ^2.0.0 || ^3.0.0 || ^4.0.0
+    dependencies:
+      '@prisma/client': 4.8.0_prisma@4.8.0
+      graphql-fields: 2.0.3
+    dev: false
 
   /@eslint/eslintrc/1.4.1:
     resolution: {integrity: sha512-XXrH9Uarn0stsyldqDYq8r++mROmWRI1xKMXa640Bb//SY1+ECYX6VzT6Lcx5frD0V30XieqJ0oX9I2Xj5aoMA==}
@@ -2996,6 +3007,10 @@ packages:
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
+
+  /graphql-fields/2.0.3:
+    resolution: {integrity: sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==}
+    dev: false
 
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
